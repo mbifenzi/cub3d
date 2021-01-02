@@ -40,11 +40,24 @@ typedef struct	s_mlx
 	void		*win;
 
 }				t_mlx;
+typedef struct	s_player
+{
+	float		px;
+	float		py;
 
+	int		walkdirection;
+	int		turndirection;
+	float 	rotationangle;
+	int		movespeed;
+	float 	rotationspeed;
+
+}				t_player;
 t_img img;
 t_mlx mlx;
-int px;
-int py;
+t_player player;
+char **line;
+//int px;
+//int py;
 int fd;
 char *t;
 void    draw_circle(int x, int y);
@@ -52,6 +65,10 @@ void    draw_map();
 int     ft_key(int key);
 void    ft_moraba3(int x, int y);
 void	get_lines(int fd);
+void    ft_move();
+void    exit_all();
+
+
 
 
 #endif
