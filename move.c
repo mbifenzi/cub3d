@@ -38,13 +38,13 @@ int ft_key(int key)
 }
 int     iswall(int x, int y)
 {
-    x = floor(x / (1920 / 32));
-    y = floor(y / (1080 / 14));
+    x = floor(x / map.wall_width);
+    y = floor(y / map.wall_height);
     if (line[y][x] == '1' || y > 1080 || x > 1920 || x < 0 || y < 0 )
         return 1;
     return 0;
     
-
+    
 
 }
 
@@ -53,20 +53,20 @@ void    ft_move()
     //printf("%d")
     int x;
     float y;
-    float a;
-    float b;
+    int a;
+    int b;
     a = player.px;
     b = player.py;
   
     player.rotationangle += player.turndirection * player.rotationspeed;
     float movestep = player.walkdirection * player.movespeed;
-      x = a + (cos(player.rotationangle + M_PI / 6) * movestep);
-      y = b + (sin(player.rotationangle +  M_PI / 6) * movestep);
+      x = a + (cos(player.rotationangle + M_PI / 6) * movestep) * map.scale;
+      y = b + (sin(player.rotationangle +  M_PI / 6) * movestep) * map.scale;
       if (!iswall(x,b))
-          player.px += cos(player.rotationangle + M_PI / 6) * movestep;
+          player.px += cos(player.rotationangle + M_PI / 6) * movestep * map.scale;
 
       if (!iswall(a,y))
-        player.py += sin(player.rotationangle +  M_PI / 6) * movestep;
+        player.py += sin(player.rotationangle +  M_PI / 6) * movestep * map.scale;
     
 
 }

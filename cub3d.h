@@ -34,12 +34,33 @@ typedef struct	s_img
  - win stores the return value of mlx_new_window
  - img will store everything we need for the image part, the struct is described above.
  */
+typedef struct	s_p
+{
+	char		*width;
+	char		*height;
+	int			l1;
+	int 		l2;
+	char 		*east;
+	char		*north;
+}				t_p;
+
 typedef struct	s_mlx
 {
 	void		*mlx_ptr;
 	void		*win;
 
 }				t_mlx;
+
+typedef struct	s_map
+{
+	int			win_height;
+	int			win_width;
+	int			tile_size;
+	int 		wall_width;
+	int			wall_height;
+	float 		scale;
+}				t_map;
+
 typedef struct	s_player
 {
 	float		px;
@@ -52,20 +73,25 @@ typedef struct	s_player
 	float 	rotationspeed;
 
 }				t_player;
+t_p g_p;
 t_img img;
 t_mlx mlx;
 t_player player;
 char **line;
+t_map map;
 //int px;
 //int py;
 int fd;
 char *t;
+char *temp;
+char **data;
 void    draw_circle(int x, int y);
 void    draw_map();
 int     ft_key(int key);
 void    ft_moraba3(int x, int y);
 void	get_lines(int fd);
 void    ft_move();
+void ft_read_lines(int fd);
 void    exit_all();
 
 
