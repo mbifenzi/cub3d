@@ -1,29 +1,23 @@
-
-SRCS_GNL = $(wildcard get_next_line/*.c)
-SRCS_CUB3D = $(wildcard *.c)
-SRCS_LIBFT = ${wildcard libft/*.c}
-SRCS = ${SRCS_CUB3D} ${SRCS_GNL} ${SRCS_LIBFT}
+SRC =	*.c
 
 
-INCL = -I includes/
+OBJECT = $(SRC:.c=.o)
 
-OBJS = ${SRCS:.c=.o}
-
-NAME = cub3D
-
-FLAGS = -Wall -Wextra -Werror -g
+NAME = cub3D.a
 
 all : $(NAME)
 
-$(NAME) : ${OBJS}
-		gcc   -I /usr/local/include -o $(NAME) ${OBJS} -L /usr/local/lib -lmlx -framework Opengl -framework AppKit  -fsanitize=address
-	
-.c.o : ${SRCS}
-		gcc  -c ${INCL} $< -o ${<:.c=.o}
-clean :
-		rm -f ${OBJS}
-fclean : clean
-		rm -f $(NAME)
-re : fclean
-		make all
-.PHONY: all clean fclean re
+$(NAME):
+	@gcc -Wall -Wextra -Werror -c $(SRC)
+	@ar rc $(NAME) $(OBJECT)
+	@ranlib $(NAME)
+	@gcc cub3d.c $(NAME) -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -o cub3D -fsanitize=address -g
+
+
+clean:
+	@rm -f $(OBJECT)
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
