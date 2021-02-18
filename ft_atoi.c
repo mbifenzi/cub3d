@@ -6,7 +6,7 @@
 /*   By: mbifenzi <mbifenzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 19:42:52 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/02/02 16:15:13 by mbifenzi         ###   ########.fr       */
+/*   Updated: 2021/02/16 14:28:53 by mbifenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_atoi(const char *str)
 		if (result > 4294967295 && sign == -1)
 			return (0);
 		else if (result > 4294967295 && sign == 1)
-			return (-1);
+			return (2560);
 		i++;
 	}
 	return ((int)result * sign);

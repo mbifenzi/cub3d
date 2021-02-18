@@ -6,7 +6,7 @@
 /*   By: mbifenzi <mbifenzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:57:58 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/02/06 16:00:01 by mbifenzi         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:32:45 by mbifenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ void		cast_all_rays(void)
 	{
 		init_rays();
 		cast_ray(ray_angle, strip_id);
-		//ft_render(strip_id);
+		ft_render(strip_id);
 		ray_angle += FOV_ANGLE / g_data.win_width;
 		strip_id++;
 	}

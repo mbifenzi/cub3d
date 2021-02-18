@@ -271,6 +271,7 @@ void	init_player(void)
 		j = -1;
 		while (++j < g_biglen)
 		{
+			
 			if (g_line[i][j] == 'E' || g_line[i][j] == 'N'
 					|| g_line[i][j] == 'S' || g_line[i][j] == 'W')
 			{
@@ -503,7 +504,7 @@ void			ft_move(void)
 	draw_map();
 	draw_player();
 	cast_all_rays();
-	//ft_sprite();
+	ft_sprite();
 
 }
 
@@ -516,6 +517,40 @@ int		ft_keys(void)
 	mlx_put_image_to_window(g_mlx.ptr, g_mlx.win, g_mlx.img, 0, 0);
 	return (0);
 }
+void			ft_check_save(char *str)
+{
+	int sv;
+
+	sv = 0;
+	if (ft_strncmp(str, "--save", 7) == 0)
+		bmp_save();
+	else
+		ft_error("Error\n2nd argument incorrect");
+}
+
+void	init_sprite(void)
+{
+	int		i;
+
+	i = 0;
+	if (!(g_sprite = malloc(sizeof(t_sprite *) * (g_sprite_c + 1))))
+		return ;
+	while (i < g_sprite_c)
+	{
+		if (!(g_sprite[i] = malloc(sizeof(t_sprite))))
+			return ;
+		if (!(g_sprite[i]->ptr = mlx_xpm_file_to_image(g_mlx.ptr,
+			g_textures[S].texture, &g_textures[S].text_width,
+			&g_textures[S].text_height)))
+			ft_error("the texture of the sprite is not well defined");
+		g_sprite[i]->data = (int *)mlx_get_data_addr(g_sprite[i]->ptr,
+				&g_sprite[i]->bpp,
+				&g_sprite[i]->size_line,
+				&g_sprite[i]->endian);
+		i++;
+	}
+	g_sprite[i] = NULL;
+}
 
 
 int main(int ac, char **av)
@@ -526,12 +561,19 @@ int main(int ac, char **av)
     ft_check_cub(av[1]);
 	ft_init();
 	ft_parsing(av[1]);
+	ft_secure_map();
+	// while (*g_line)
+	// {
+	// 	//printf("|%s|\n", *g_line);
+	// 	g_line++;
+	// }
 	init_mlx();	
-
 	init_player();
-
+	init_sprite();
 	init_move();
-
+	ft_get_texture();
+	 if (av[2])
+	 	ft_check_save(av[2]);
 	// TODO: getting textures
 	mlx_loop_hook(g_mlx.ptr, ft_keys, (void*)0);
 	mlx_loop(g_mlx.ptr);

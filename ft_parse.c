@@ -6,7 +6,7 @@
 /*   By: mbifenzi <mbifenzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 17:10:19 by mbifenzi          #+#    #+#             */
-/*   Updated: 2021/02/06 14:46:53 by mbifenzi         ###   ########.fr       */
+/*   Updated: 2021/02/17 18:05:21 by mbifenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		ft_sizeofmap(void)
 			g_biglen = ft_strlen(g_line[g_sizeofmap]);
 		g_sizeofmap++;
 	}
+    g_biglen = g_biglen + 2;
 }
 
 void     get_lines(int fd)

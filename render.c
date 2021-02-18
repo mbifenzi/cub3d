@@ -35,27 +35,27 @@ void		render_ceiling(int start, int i)
 					g_color[1].color_c, g_color[2].color_c));
 }
 
-void		render_wall(int bot, int start, int i/*, float wall_h*/)
+void		render_wall(int bot, int start, int i, float wall_h)
 {
-	// float	tex_x;
-	// float	tex_y;
+	float	tex_x;
+	float	tex_y;
 	int		bdya;
-	// //int		color;
-	// int		t;
+	int		color;
+	int		t;
 
-	//t = is_facing(i);
+	t = is_facing(i);
 	bdya = start - 1;
-	// tex_x = g_ray[i].was_hit_v ? g_ray[i].wall_hity / TILE_SIZE
-	// 	: g_ray[i].wall_hitx / TILE_SIZE;
-	// tex_x -= (int)tex_x;
-	// tex_x *= g_textures[t].text_width;
+	 tex_x = g_ray[i].was_hit_v ? g_ray[i].wall_hity / TILE_SIZE
+		: g_ray[i].wall_hitx / TILE_SIZE;
+	tex_x -= (int)tex_x;
+	 tex_x *= g_textures[t].text_width;
 	while (++bdya < bot)
 	{
-		// tex_y = (bdya - ((g_data.win_height / 2) - (wall_h / 2)))
-		// 	* ((float)g_textures[t].text_height / wall_h);
-		// color = g_textures[t].text[((int)tex_y
-		// 		* g_textures[t].text_width) + (int)tex_x];
-		my_mlx_pixel_put(bdya, i, 0xffffff);
+		tex_y = (bdya - ((g_data.win_height / 2) - (wall_h / 2)))
+			* ((float)g_textures[t].text_height / wall_h);
+		color = g_textures[t].text[((int)tex_y
+				* g_textures[t].text_width) + (int)tex_x];
+		my_mlx_pixel_put(bdya, i, color);
 	}
 }
 
@@ -85,6 +85,6 @@ void		ft_render(int i)
 	bot = (g_data.win_height / 2) + (wall_h / 2);
 	bot = (bot > g_data.win_height) ? g_data.win_height : bot;
 	render_ceiling(start, i);
-	render_wall(bot, start, i);//, wall_h);
+	render_wall(bot, start, i, wall_h);
 	render_floor(bot, i);
 }
